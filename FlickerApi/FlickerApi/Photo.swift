@@ -9,7 +9,9 @@
 import Foundation
 
 
-class Photo{
+class Photo: Equatable{
+    
+    //enabled comparing with one Photo to another
     
     let title:String
     let remoteURL: URL
@@ -21,5 +23,11 @@ class Photo{
         self.remoteURL = remoteURL
         self.photoID = photoID
         self.dateTaken = dateTaken
+    }
+    
+    // When you create your own class, xcode does not know how to compare.
+    // It will compare the memory address instead of the value
+    public static func ==(lhs: Photo, rhs: Photo) -> Bool {
+        return lhs.photoID == rhs.photoID
     }
 }

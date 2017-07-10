@@ -28,13 +28,6 @@ class PhotoDataSource: NSObject, UICollectionViewDataSource {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier,for:indexPath) as! PhotoCell
         
-        let urlImage = photoList[indexPath.row].remoteURL
-        let data = try! Data(contentsOf: urlImage)
-        
-        let image = UIImage(data: data)
-        cell.cellImageView.image = image
-        
-        print(data)
         return cell
     }
 }

@@ -37,11 +37,11 @@ struct FlickerApi {
     
     //This is additional prarameters
     static var interestingPhotosURL: URL{
-        return flickrURL(method: .interestingPhotos, parameters: ["extras":"url_h,date_taken"])
+        return flickrURL(method: .interestingPhotos, parameters: ["extras":"url_s,date_taken"])
     }
     
     static var recentPhotosURL: URL{
-        return flickrURL(method: .recentPhotos, parameters: ["extras":"url_h,date_taken"])
+        return flickrURL(method: .recentPhotos, parameters: ["extras":"url_s,date_taken"])
     }
 
     
@@ -110,7 +110,7 @@ struct FlickerApi {
         guard let photoID = json["id"] as? String,
         let title = json["title"] as? String,
         let dateString = json["datetaken"] as? String,
-        let photoURLString = json["url_h"] as? String,
+        let photoURLString = json["url_s"] as? String,
         let url = URL(string: photoURLString),
             let dateTaken = dateFormatter.date(from: dateString) else{
                 return nil

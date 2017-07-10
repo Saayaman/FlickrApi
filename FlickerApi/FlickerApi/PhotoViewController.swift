@@ -7,7 +7,7 @@ class PhotoViewController: UIViewController {
 
     var store:PhotoStore!
     let photoDataSource = PhotoDataSource()
-    
+
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -19,17 +19,15 @@ class PhotoViewController: UIViewController {
             //result is [Photo]
             switch result{
             case let .success(photos):
-                
-                DispatchQueue.main.async(execute: { () -> Void in
-                    self.photoDataSource.photoList = photos
-                })
+                self.photoDataSource.photoList = photos
             
             case let .failure(error):
                 print("Error! \(error)")
+                self.photoDataSource.photoList.removeAll()
             }
             
-            self.collectionView.reloadData()
-//            self.collectionView.reloadSections(IndexSet())
+//            self.collectionView.reloadData()
+            self.collectionView.reloadSections(IndexSet(integer:0))
         }
     }
 
@@ -42,6 +40,25 @@ class PhotoViewController: UIViewController {
 
 
 extension PhotoViewController: UICollectionViewDelegate{
+//    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+        let photo = photoDataSource.photoList[indexPath.row]
+        
+        store.fetchImage(for: photo){(result) in
+//            //get the most recent photo! result is Photo!
+            guard let photoIndex = self.photoDataSource.photoList.index(of: photo),
+                case let .success(image) = result else {
+                    return
+            }
+        
+            let photoIndexPath = IndexPath(item:photoIndex, section:0)
+            if let cell = self.collectionView.cellForItem(at: photoIndexPath) as? PhotoCell{
+                cell.update(with: image)
+            }
+
+        }
+    }
     
 }
 

@@ -44,10 +44,18 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 </imageView>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="LJZ-gK-0dC">
+                                                    <rect key="frame" x="30" y="30" width="20" height="20"/>
+                                                </activityIndicatorView>
                                             </subviews>
                                         </view>
+                                        <constraints>
+                                            <constraint firstItem="LJZ-gK-0dC" firstAttribute="centerX" secondItem="vns-he-VPy" secondAttribute="centerX" id="mfe-7S-sTu"/>
+                                            <constraint firstItem="LJZ-gK-0dC" firstAttribute="centerY" secondItem="vns-he-VPy" secondAttribute="centerY" id="o0o-FN-ZT5"/>
+                                        </constraints>
                                         <connections>
                                             <outlet property="cellImageView" destination="JC2-sJ-Bwd" id="ywE-aq-0kU"/>
+                                            <outlet property="spinner" destination="LJZ-gK-0dC" id="mjf-WW-ShS"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
