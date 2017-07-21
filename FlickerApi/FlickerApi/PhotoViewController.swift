@@ -45,6 +45,8 @@ extension PhotoViewController: UICollectionViewDelegate{
         
         let photo = photoDataSource.photoList[indexPath.row]
         
+        
+        
         store.fetchImage(for: photo){(result) in
 //            //get the most recent photo! result is Photo!
             guard let photoIndex = self.photoDataSource.photoList.index(of: photo),
@@ -54,12 +56,12 @@ extension PhotoViewController: UICollectionViewDelegate{
         
             let photoIndexPath = IndexPath(item:photoIndex, section:0)
             if let cell = self.collectionView.cellForItem(at: photoIndexPath) as? PhotoCell{
+                cell.labe.text = "some text"
                 cell.update(with: image)
             }
 
         }
     }
-    
 }
 
 extension PhotoViewController: UICollectionViewDelegateFlowLayout{

@@ -11,6 +11,7 @@ import UIKit
 class PhotoCell: UICollectionViewCell {
     @IBOutlet weak var cellImageView: UIImageView!
     
+    @IBOutlet weak var labe: UILabel!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
 
     override func awakeFromNib() {

@@ -19,6 +19,8 @@ enum PhotoError: Error{
 
 
 class PhotoStore{
+    
+     let imageStore = ImageStore()
 
     private let session: URLSession = {
         let config = URLSessionConfiguration.default
@@ -66,6 +68,17 @@ class PhotoStore{
     }
     
     func fetchImage(for photo:Photo, completion: @escaping (ImageResult) -> Void){
+        
+        let photoKey = photo.photoID
+        if let image = imageStore.image(forKey: photoKey) {
+            
+            print("caches")
+            OperationQueue.main.addOperation {
+                completion(.success(image))
+            }
+            return
+        }
+        
         let photoURL = photo.remoteURL
         let request = URLRequest(url: photoURL)
         let task = session.dataTask(with: request){
